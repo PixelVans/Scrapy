@@ -3,7 +3,6 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 
@@ -33,8 +32,8 @@ class LibrascraperPipeline:
         price_keys = ['price', 'price_excl_tax', 'price_incl_tax', 'tax']
         for price_key in price_keys:
             value = adapter.get(price_key)
-            value = value.replace('$', '')
-            adapter[price_key] = float(value)
+            value = value.replace('£', '$')
+            adapter[price_key] = value
 
 
         ## Availability --> extract number of books in stock
@@ -74,3 +73,4 @@ class LibrascraperPipeline:
         return item
 
 
+  
