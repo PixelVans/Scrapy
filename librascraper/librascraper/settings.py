@@ -12,6 +12,10 @@ BOT_NAME = "librascraper"
 SPIDER_MODULES = ["librascraper.spiders"]
 NEWSPIDER_MODULE = "librascraper.spiders"
 
+# specifies where to save the data when crawl command is run
+# FEEDS = {
+#     'cleanedbooksdata.json': {'format': 'json'},
+# }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "librascraper (+http://www.yourdomain.com)"
@@ -63,7 +67,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "librascraper.pipelines.LibrascraperPipeline": 300,
+   "librascraper.pipelines.LibrascraperPipeline": 100,
+   "librascraper.pipelines.SaveToMySQLPipeline": 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
