@@ -191,16 +191,17 @@ class ScrapeOpsFakeBrowserHeaderAgentMiddleware:
     def process_request(self, request, spider):        
         random_browser_header = self._get_random_browser_header()
 
-        request.headers['accept-language'] = random_browser_header['accept-language']
-        request.headers['sec-fetch-user'] = random_browser_header['sec-fetch-user'] 
-        request.headers['sec-fetch-mod'] = random_browser_header['sec-fetch-mod'] 
-        request.headers['sec-fetch-site'] = random_browser_header['sec-fetch-site'] 
-        request.headers['sec-ch-ua-platform'] = random_browser_header['sec-ch-ua-platform'] 
-        request.headers['sec-ch-ua-mobile'] = random_browser_header['sec-ch-ua-mobile'] 
-        request.headers['sec-ch-ua'] = random_browser_header['sec-ch-ua'] 
-        request.headers['accept'] = random_browser_header['accept'] 
-        request.headers['user-agent'] = random_browser_header['user-agent'] 
-        request.headers['upgrade-insecure-requests'] = random_browser_header.get('upgrade-insecure-requests')
+        request.headers['accept-language'] = random_browser_header.get('accept-language', 'en-US,en;q=0.5')
+        request.headers['sec-fetch-user'] = random_browser_header.get('sec-fetch-user', '?1')
+        request.headers['sec-fetch-mod'] = random_browser_header.get('sec-fetch-mod', 'navigate')
+        request.headers['sec-fetch-site'] = random_browser_header.get('sec-fetch-site', 'same-origin')
+        request.headers['sec-ch-ua-platform'] = random_browser_header.get('sec-ch-ua-platform', '"Windows"')
+        request.headers['sec-ch-ua-mobile'] = random_browser_header.get('sec-ch-ua-mobile', '?0')
+        request.headers['sec-ch-ua'] = random_browser_header.get('sec-ch-ua', '"Google Chrome";v="120", "Chromium";v="120", "Not=A?Brand";v="99"')
+        request.headers['accept'] = random_browser_header.get('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8')
+        request.headers['user-agent'] = random_browser_header.get('user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+        request.headers['upgrade-insecure-requests'] = random_browser_header.get('upgrade-insecure-requests', '1')
+
     
 
         print("************ NEW HEADER ATTACHED *******")

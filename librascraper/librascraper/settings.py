@@ -17,6 +17,15 @@ SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agent
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
 SCRAPEOPS_NUM_RESULTS = 5
 
+
+#Free proxies obtained from geonode (https://geonode.com/free-proxy-list)
+ROTATING_PROXY_LIST = [
+  '181.66.37.210:4153',
+  '114.141.61.2:4145',
+  '67.43.236.18:20067',
+ ]
+
+
 #USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
 
 # specifies where to save the data when crawl command is run
@@ -64,6 +73,8 @@ ROBOTSTXT_OBEY = False
 DOWNLOADER_MIDDLEWARES = {
   # "librascraper.middlewares.LibrascraperDownloaderMiddleware": 543,
    "librascraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,
+   "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
+   "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
 }
 
 # Enable or disable extensions
