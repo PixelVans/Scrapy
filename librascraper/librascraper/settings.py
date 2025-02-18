@@ -12,6 +12,10 @@ BOT_NAME = "librascraper"
 SPIDER_MODULES = ["librascraper.spiders"]
 NEWSPIDER_MODULE = "librascraper.spiders"
 
+SCRAPEOPS_API_KEY = '90caa673-9715-43a6-ad71-5e61bf88ad94' # from https://scrapeops.io
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 5
 
 #USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
 
@@ -24,7 +28,7 @@ NEWSPIDER_MODULE = "librascraper.spiders"
 #USER_AGENT = "librascraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -57,9 +61,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "librascraper.middlewares.LibrascraperDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+  # "librascraper.middlewares.LibrascraperDownloaderMiddleware": 543,
+   "librascraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
