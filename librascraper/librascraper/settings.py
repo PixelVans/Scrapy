@@ -12,7 +12,8 @@ BOT_NAME = "librascraper"
 SPIDER_MODULES = ["librascraper.spiders"]
 NEWSPIDER_MODULE = "librascraper.spiders"
 
-SCRAPEOPS_API_KEY = '90caa673-9715-43a6-ad71-5e61bf88ad94' # from https://scrapeops.io
+#obtaining free Agents headers from scrapeops.io
+SCRAPEOPS_API_KEY = 'bb10ccbd-8ea0-4f28-b7be-bae72dc31ce1' # from https://scrapeops.io
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
 SCRAPEOPS_NUM_RESULTS = 5
@@ -25,7 +26,7 @@ ROTATING_PROXY_LIST = [
   '67.43.236.18:20067',
  ]
 
-# Proxy settings
+# Proxy settings for premium proxies with IP adress rotation eg from smartnet
 PROXY_USER = "your_proxy_username"
 PROXY_PASSWORD = "your_proxy_password"
 PROXY_SERVER = "your.proxy.server"  # Example: "proxy.example.com"

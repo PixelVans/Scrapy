@@ -1,9 +1,20 @@
 import scrapy
 from librascraper.items import BookItem  
+from urllib.parse import urlencode
+
+
+API_KEY = 'APIKEYFROM SCRAPEOPS.IO'
+ #A METHOd TO MOUNT THE API ENDPOINTS AND AVOID MOUNTING HEADERS AND AGENTS ALL IN ONE
+ #The function is to be used where we make requests Scrapy.Request
+def get_proxy_url(url):
+    payload = {'api_key': API_KEY, 'url' : url}
+    proxy_url = 'the url obtaned from paid scrapeops api proxy' + urlencode(payload)
+    return proxy_url
+
 
 class BookspiderSpider(scrapy.Spider):
     name = 'bookspider'
-    allowed_domains = ['books.toscrape.com']
+    allowed_domains = ['books.toscrape.com'] #add the scrapeops in the allowed domains to allow proxy mounting
     start_urls = ['https://books.toscrape.com/']
 
     # custom_settings = {
@@ -21,7 +32,10 @@ class BookspiderSpider(scrapy.Spider):
     #     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:113.0) Gecko/20100101 Firefox/113.0",
     #     "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:115.0) Gecko/20100101 Firefox/115.0"
     #     ]
-
+    
+    #This method mounts the start urls to the proxy API defined above.
+    # def start_requests(self):
+    #     yield scrapy.Request(url=get_proxy_url(self.start_urls[0]), callback=self.parse, )
 
     def parse(self, response):
         books = response.css('article.product_pod')
@@ -36,6 +50,10 @@ class BookspiderSpider(scrapy.Spider):
     #eg   yield response.follow(book_url, callback=self.parse_book_page, meta={"proxy:enterurlendpoint here"} )
     # alternatively, this can be added in the middleware
             yield response.follow(book_url, callback=self.parse_book_page, )
+            
+    # Mounting   THE API ENDPOINTS AND AVOID MOUNTING HEADERS AND AGENTS ALL IN ONE      
+    #        yield scrapy.Request(url=get_proxy_url(book_url), callback=self.parse_book_page, )
+            
 
         next_page = response.css('li.next a ::attr(href)').get()
         if next_page is not None:
@@ -44,9 +62,11 @@ class BookspiderSpider(scrapy.Spider):
             else:
                 next_page_url = 'https://books.toscrape.com/catalogue/' + next_page
     #add the meta={"proxy:urlendpoint"} as the second arguement in the follow response, to include the premium managed proxy endpoint
-    # eg   yield response.follow(next_page_url, callback=self.parse, meta={"enterproxy:urlendpoint here"})          
+    # eg   yield response.follow(next_page_url, callback=self.parse, meta={"enterproxy:urlendpoint here password username"})          
             yield response.follow(next_page_url, callback=self.parse,)
-
+            
+        # Mounting   THE API ENDPOINTS AND AVOID MOUNTING HEADERS AND AGENTS ALL IN ONE      
+    #        yield scrapy.Request(url=get_proxy_url(book_url), callback=self.parse, )
 
     def parse_book_page(self, response):
 
