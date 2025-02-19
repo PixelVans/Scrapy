@@ -32,6 +32,9 @@ class BookspiderSpider(scrapy.Spider):
                 book_url = 'https://books.toscrape.com/' + relative_url
             else:
                 book_url = 'https://books.toscrape.com/catalogue/' + relative_url
+    #add the meta={"proxy:urlendpoint"} as the second arguement in the follow response, to include the premium managed proxy endpoint
+    #eg   yield response.follow(book_url, callback=self.parse_book_page, meta={"proxy:enterurlendpoint here"} )
+    # alternatively, this can be added in the middleware
             yield response.follow(book_url, callback=self.parse_book_page, )
 
         next_page = response.css('li.next a ::attr(href)').get()
@@ -40,6 +43,8 @@ class BookspiderSpider(scrapy.Spider):
                 next_page_url = 'https://books.toscrape.com/' + next_page
             else:
                 next_page_url = 'https://books.toscrape.com/catalogue/' + next_page
+    #add the meta={"proxy:urlendpoint"} as the second arguement in the follow response, to include the premium managed proxy endpoint
+    # eg   yield response.follow(next_page_url, callback=self.parse, meta={"enterproxy:urlendpoint here"})          
             yield response.follow(next_page_url, callback=self.parse,)
 
 

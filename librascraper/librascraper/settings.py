@@ -25,6 +25,13 @@ ROTATING_PROXY_LIST = [
   '67.43.236.18:20067',
  ]
 
+# Proxy settings
+PROXY_USER = "your_proxy_username"
+PROXY_PASSWORD = "your_proxy_password"
+PROXY_SERVER = "your.proxy.server"  # Example: "proxy.example.com"
+PROXY_PORT = "8080"  # Example: 8080
+
+
 
 #USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
 
@@ -72,9 +79,14 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
   # "librascraper.middlewares.LibrascraperDownloaderMiddleware": 543,
-   "librascraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,
-   "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
-   "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
+  "librascraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,
+   
+  # FOR THE POROXY MIDDLEWARE CLASS TO BE ADDED eg from smartproxy
+  #  "librascraper.middlewares.MyProxyMiddleware": 300,
+   
+  # THE ROTATING PROXIES ARE TO BE USED WHEN FREE PROXIES ARE WORKING
+  #  "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
+  #  "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
 }
 
 # Enable or disable extensions
