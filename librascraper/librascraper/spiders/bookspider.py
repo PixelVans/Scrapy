@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 API_KEY = 'APIKEYFROM SCRAPEOPS.IO'
  #A METHOd TO MOUNT THE API ENDPOINTS AND AVOID MOUNTING HEADERS AND AGENTS ALL IN ONE
  #The function is to be used where we make requests Scrapy.Request
+ # to avoid adding the function and api codes here, pip install scrapeops-scrapy-proxy-sdk
 def get_proxy_url(url):
     payload = {'api_key': API_KEY, 'url' : url}
     proxy_url = 'the url obtaned from paid scrapeops api proxy' + urlencode(payload)
